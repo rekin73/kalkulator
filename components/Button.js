@@ -17,10 +17,15 @@ class Button extends Component {
     onPress(event) {
         this.props.handleViewer(this.state.value.toString())
     }
+    update = (e) => {
+        console.log(this.state.value);
+        this.props.onUpdate(this.state.value);
+        //this.setState({fieldVal: e.target.value});
+      };
     render() {
         return (
 
-            <TouchableOpacity style={styles({ b: this.state.bColor }).viewer} onPress={this.props.handleViewer}>
+            <TouchableOpacity style={styles({ b: this.state.bColor }).viewer} onPress={this.update}>
                 <View>
                     <Text style={styles({ c: this.state.tColor }).text}>{this.state.value}</Text>
                 </View>

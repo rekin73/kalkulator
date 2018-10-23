@@ -12,7 +12,7 @@ import Button from "./components/Button"
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handlePress = this.handlePress.bind(this.handlePress);
+    //this.handlePress = this.handlePress.bind(this.handlePress);
     //this.handlePP = this.handlePP.bind(this.handlePP, this, this.handlePress);
     this.generatePad = this.generatePad.bind(this);
     this.state = {
@@ -21,10 +21,11 @@ export default class App extends React.Component {
     };
 
   }
-  handlePress(event) {
-    //event.setState({ data: event.target.value });
-
-    //this.handlePP(event)
+  onUpdate = (val) => {
+    
+    this.setState({
+      data: val
+    })
   };
 
   generatePad = function () {
@@ -35,10 +36,10 @@ export default class App extends React.Component {
           value.map((value1) => {
 
             if (index != 3) {
-              return <Button data={{ value: value1, color: "grey" }} key={value1.toString()} handleViewer={this.handlePress} />
+              return <Button data={{ value: value1, color: "grey" }} key={value1.toString()} onUpdate={this.onUpdate} />
             }
             else {
-              return <Button data={{ value: value1, color: "silver" }} key={value1.toString()} />
+              return <Button data={{ value: value1, color: "silver" }} key={value1.toString()} onUpdate={this.onUpdate}/>
             }
 
           })}
@@ -51,8 +52,8 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Viewer />
-        <Text>{this.state.data}</Text>
+        <Viewer data={this.state.data}/>
+        
 
         <View style={styles.input}>
           {this.generatePad()}
